@@ -199,10 +199,17 @@ class Imagick
 #endif
 
 #if MagickLibVersion > 0x635
-
-    // TODO - Imagick
     public function clutImage(Imagick $lookup_table, int $channel = Imagick::CHANNEL_DEFAULT): bool  {}
+#endif
 
+#if MagickLibVersion >= 0x700
+    public function clutImageWithInterpolateMethod(
+        Imagick $lookup_table,
+        int $interpolate_method // INTERPOLATE_*
+    ): bool  {}
+#endif
+
+#if MagickLibVersion > 0x635
     public function getImageProperties(string $pattern = "*", bool $include_values = true): array  {}
 
     public function getImageProfiles(string $pattern = "*", bool $include_values = true): array  {}
@@ -1246,7 +1253,7 @@ proto bool Imagick::setImageBluePrimary(float x, float y, float z) */
 //    public function key(): int  {}
 //
 //# endif
-//#endif
+
 
     /** @alias Imagick::nextImage
      *  @tentative-return-type
@@ -1261,6 +1268,7 @@ proto bool Imagick::setImageBluePrimary(float x, float y, float z) */
     public function valid(): bool  {}
 
     public function current(): Imagick  {}
+#endif
 
 #if MagickLibVersion >= 0x659
     public function brightnessContrastImage(

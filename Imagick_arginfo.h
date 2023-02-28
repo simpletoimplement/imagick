@@ -849,6 +849,24 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_clutImage, 0, 0, 1)
 ZEND_END_ARG_INFO()
 #endif
 
+#if MagickLibVersion >= 0x700
+
+#if PHP_VERSION_ID >= 80000
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_clutImageWithInterpolateMethod, 0, 2, _IS_BOOL, 0)
+#else
+ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_clutImageWithInterpolateMethod, 0, 0, 2)
+#endif
+
+	ZEND_ARG_OBJ_INFO(0, lookup_table, Imagick, 0)
+	
+#if PHP_VERSION_ID >= 80000
+    ZEND_ARG_TYPE_INFO(0, interpolate_method, IS_LONG, 0)
+#else
+    ZEND_ARG_INFO(0, interpolate_method)
+#endif
+ZEND_END_ARG_INFO()
+#endif
+
 #if MagickLibVersion > 0x635
 
 #if PHP_VERSION_ID >= 80000
@@ -5054,7 +5072,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_current, 0, 0, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x659
+#if MagickLibVersion >= 0x659
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_brightnessContrastImage, 0, 2, _IS_BOOL, 0)
@@ -5078,7 +5096,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_brightnessContrastImage, 0, 0, 2)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && MagickLibVersion > 0x661
+#if MagickLibVersion > 0x661
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_colorMatrixImage, 0, 1, _IS_BOOL, 0)
@@ -5095,7 +5113,6 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_colorMatrixImage, 0, 0, 1)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_selectiveBlurImage, 0, 3, _IS_BOOL, 0)
@@ -5123,9 +5140,8 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_selectiveBlurImage, 0, 0, 3)
 #endif
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, channel, IS_LONG, 0, "Imagick::CHANNEL_DEFAULT")
 ZEND_END_ARG_INFO()
-#endif
 
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x689
+#if MagickLibVersion >= 0x689
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_rotationalBlurImage, 0, 1, _IS_BOOL, 0)
@@ -5143,7 +5159,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_rotationalBlurImage, 0, 0, 1)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x683
+#if MagickLibVersion >= 0x683
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_statisticImage, 0, 3, _IS_BOOL, 0)
@@ -5173,7 +5189,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_statisticImage, 0, 0, 3)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x652
+#if MagickLibVersion >= 0x652
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_class_Imagick_subimageMatch, 0, 1, Imagick, 0)
@@ -5207,62 +5223,17 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_subimageMatch, 0, 0, 1)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x652
+#if MagickLibVersion >= 0x652
 #define arginfo_class_Imagick_similarityImage arginfo_class_Imagick_subimageMatch
 #endif
 
-#if MagickLibVersion > 0x628
+#define arginfo_class_Imagick_setRegistry arginfo_class_Imagick_setOption
 
-#if PHP_VERSION_ID >= 80000
-ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_setRegistry, 0, 2, _IS_BOOL, 0)
-#else
-ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_setRegistry, 0, 0, 2)
-#endif
+#define arginfo_class_Imagick_getRegistry arginfo_class_Imagick_getOption
 
-	
-#if PHP_VERSION_ID >= 80000
-    ZEND_ARG_TYPE_INFO(0, key, IS_STRING, 0)
-#else
-    ZEND_ARG_INFO(0, key)
-#endif
-	
-#if PHP_VERSION_ID >= 80000
-    ZEND_ARG_TYPE_INFO(0, value, IS_STRING, 0)
-#else
-    ZEND_ARG_INFO(0, value)
-#endif
-ZEND_END_ARG_INFO()
-#endif
+#define arginfo_class_Imagick_listRegistry arginfo_class_Imagick_getImageGeometry
 
-#if MagickLibVersion > 0x628
-
-#if PHP_VERSION_ID >= 80000
-ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_getRegistry, 0, 1, IS_STRING, 0)
-#else
-ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_getRegistry, 0, 0, 1)
-#endif
-
-	
-#if PHP_VERSION_ID >= 80000
-    ZEND_ARG_TYPE_INFO(0, key, IS_STRING, 0)
-#else
-    ZEND_ARG_INFO(0, key)
-#endif
-ZEND_END_ARG_INFO()
-#endif
-
-#if MagickLibVersion > 0x628
-
-#if PHP_VERSION_ID >= 80000
-ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_listRegistry, 0, 0, IS_ARRAY, 0)
-#else
-ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_listRegistry, 0, 0, 0)
-#endif
-
-ZEND_END_ARG_INFO()
-#endif
-
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x680
+#if MagickLibVersion >= 0x680
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_morphology, 0, 3, _IS_BOOL, 0)
@@ -5287,7 +5258,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_morphology, 0, 0, 3)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && defined(IMAGICK_WITH_KERNEL) && MagickLibVersion < 0x700
+#if defined(IMAGICK_WITH_KERNEL) && MagickLibVersion < 0x700
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_filter, 0, 1, _IS_BOOL, 0)
@@ -5300,7 +5271,6 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_filter, 0, 0, 1)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_setAntialias, 0, 1, IS_VOID, 0)
@@ -5315,13 +5285,10 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_setAntialias, 0, 0, 1)
     ZEND_ARG_INFO(0, antialias)
 #endif
 ZEND_END_ARG_INFO()
-#endif
 
-#if MagickLibVersion > 0x628
-#define arginfo_class_Imagick_getAntialias arginfo_class_Imagick_optimizeImageLayers
-#endif
+#define arginfo_class_Imagick_getAntialias arginfo_class_Imagick_removeImage
 
-#if MagickLibVersion > 0x628 && MagickLibVersion > 0x676
+#if MagickLibVersion > 0x676
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_colorDecisionListImage, 0, 1, _IS_BOOL, 0)
@@ -5338,7 +5305,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_colorDecisionListImage, 0, 0, 1)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x687
+#if MagickLibVersion >= 0x687
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_optimizeImageTransparency, 0, 0, IS_VOID, 0)
@@ -5349,7 +5316,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_optimizeImageTransparency, 0, 0, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x660
+#if MagickLibVersion >= 0x660
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_autoGammaImage, 0, 0, IS_VOID, 0)
@@ -5361,7 +5328,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_autoGammaImage, 0, 0, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x692
+#if MagickLibVersion >= 0x692
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_autoOrient, 0, 0, IS_VOID, 0)
@@ -5372,11 +5339,11 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_autoOrient, 0, 0, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x692
+#if MagickLibVersion >= 0x692
 #define arginfo_class_Imagick_autoOrientate arginfo_class_Imagick_autoOrient
 #endif
 
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x692
+#if MagickLibVersion >= 0x692
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_compositeImageGravity, 0, 3, _IS_BOOL, 0)
@@ -5400,7 +5367,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_compositeImageGravity, 0, 0, 3)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x693
+#if MagickLibVersion >= 0x693
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_localContrastImage, 0, 2, IS_VOID, 0)
@@ -5423,7 +5390,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_localContrastImage, 0, 0, 2)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x700
+#if MagickLibVersion >= 0x700
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_identifyImageType, 0, 0, IS_LONG, 0)
@@ -5434,7 +5401,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_identifyImageType, 0, 0, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GETSETIMAGEMASK
+#if IM_HAVE_IMAGICK_GETSETIMAGEMASK
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_class_Imagick_getImageMask, 0, 1, Imagick, 1)
@@ -5451,7 +5418,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_getImageMask, 0, 0, 1)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GETSETIMAGEMASK
+#if IM_HAVE_IMAGICK_GETSETIMAGEMASK
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_setImageMask, 0, 2, IS_VOID, 0)
@@ -5469,7 +5436,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_setImageMask, 0, 0, 2)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x709
+#if MagickLibVersion >= 0x709
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_cannyEdgeImage, 0, 4, _IS_BOOL, 0)
@@ -5504,7 +5471,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_cannyEdgeImage, 0, 0, 4)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_SETSEED
+#if IM_HAVE_IMAGICK_SETSEED
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_setSeed, 0, 1, IS_VOID, 0)
@@ -5521,7 +5488,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_setSeed, 0, 0, 1)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_WAVELETDENOISEIMAGE
+#if IM_HAVE_IMAGICK_WAVELETDENOISEIMAGE
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_waveletDenoiseImage, 0, 2, _IS_BOOL, 0)
@@ -5544,7 +5511,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_waveletDenoiseImage, 0, 0, 2)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_MEANSHIFTIMAGE
+#if IM_HAVE_IMAGICK_MEANSHIFTIMAGE
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_meanShiftImage, 0, 3, _IS_BOOL, 0)
@@ -5573,7 +5540,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_meanShiftImage, 0, 0, 3)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_KMEANSIMAGE
+#if IM_HAVE_IMAGICK_KMEANSIMAGE
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_kmeansImage, 0, 3, _IS_BOOL, 0)
@@ -5602,7 +5569,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_kmeansImage, 0, 0, 3)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_RANGETHRESHOLDIMAGE
+#if IM_HAVE_IMAGICK_RANGETHRESHOLDIMAGE
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_rangeThresholdImage, 0, 4, _IS_BOOL, 0)
@@ -5637,7 +5604,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_rangeThresholdImage, 0, 0, 4)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_AUTOTHRESHOLDIMAGE
+#if IM_HAVE_IMAGICK_AUTOTHRESHOLDIMAGE
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_autoThresholdImage, 0, 1, _IS_BOOL, 0)
@@ -5654,7 +5621,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_autoThresholdImage, 0, 0, 1)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_BILATERALBLURIMAGE
+#if IM_HAVE_IMAGICK_BILATERALBLURIMAGE
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_bilateralBlurImage, 0, 4, _IS_BOOL, 0)
@@ -5689,7 +5656,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_bilateralBlurImage, 0, 0, 4)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_CLAHEIMAGE
+#if IM_HAVE_IMAGICK_CLAHEIMAGE
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_claheImage, 0, 4, _IS_BOOL, 0)
@@ -5724,7 +5691,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_claheImage, 0, 0, 4)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_CHANNELFXIMAGE
+#if IM_HAVE_IMAGICK_CHANNELFXIMAGE
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_class_Imagick_channelFxImage, 0, 1, Imagick, 0)
@@ -5741,7 +5708,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_channelFxImage, 0, 0, 1)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_COLORTHRESHOLDIMAGE
+#if IM_HAVE_IMAGICK_COLORTHRESHOLDIMAGE
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_colorThresholdImage, 0, 2, _IS_BOOL, 0)
@@ -5754,7 +5721,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_colorThresholdImage, 0, 0, 2)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_COMPLEXIMAGES
+#if IM_HAVE_IMAGICK_COMPLEXIMAGES
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_class_Imagick_complexImages, 0, 1, Imagick, 0)
@@ -5771,7 +5738,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_complexImages, 0, 0, 1)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_INTERPOLATIVERESIZEIMAGE
+#if IM_HAVE_IMAGICK_INTERPOLATIVERESIZEIMAGE
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_interpolativeResizeImage, 0, 3, _IS_BOOL, 0)
@@ -5800,7 +5767,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_interpolativeResizeImage, 0, 0, 3)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_LEVELIMAGECOLORS
+#if IM_HAVE_IMAGICK_LEVELIMAGECOLORS
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_levelImageColors, 0, 3, _IS_BOOL, 0)
@@ -5819,7 +5786,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_levelImageColors, 0, 0, 3)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_LEVELIZEIMAGE
+#if IM_HAVE_IMAGICK_LEVELIZEIMAGE
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_levelizeImage, 0, 3, _IS_BOOL, 0)
@@ -5848,7 +5815,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_levelizeImage, 0, 0, 3)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_ORDEREDDITHERIMAGE
+#if IM_HAVE_IMAGICK_ORDEREDDITHERIMAGE
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_orderedDitherImage, 0, 1, _IS_BOOL, 0)
@@ -5865,7 +5832,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_orderedDitherImage, 0, 0, 1)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_WHITEBALANCEIMAGE
+#if IM_HAVE_IMAGICK_WHITEBALANCEIMAGE
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_whiteBalanceImage, 0, 0, _IS_BOOL, 0)
@@ -5876,7 +5843,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_whiteBalanceImage, 0, 0, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_DELETE_OPTION
+#if IM_HAVE_IMAGICK_DELETE_OPTION
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_deleteOption, 0, 1, _IS_BOOL, 0)
@@ -5893,7 +5860,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_deleteOption, 0, 0, 1)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_BACKGROUND_COLOR
+#if IM_HAVE_IMAGICK_GET_BACKGROUND_COLOR
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_class_Imagick_getBackgroundColor, 0, 0, ImagickPixel, 0)
@@ -5904,7 +5871,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_getBackgroundColor, 0, 0, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_IMAGE_ARTIFACTS
+#if IM_HAVE_IMAGICK_GET_IMAGE_ARTIFACTS
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_getImageArtifacts, 0, 0, IS_ARRAY, 0)
@@ -5916,7 +5883,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_getImageArtifacts, 0, 0, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_IMAGE_KURTOSIS
+#if IM_HAVE_IMAGICK_GET_IMAGE_KURTOSIS
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_getImageKurtosis, 0, 0, IS_ARRAY, 0)
@@ -5927,7 +5894,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_getImageKurtosis, 0, 0, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_IMAGE_MEAN
+#if IM_HAVE_IMAGICK_GET_IMAGE_MEAN
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_getImageMean, 0, 0, IS_ARRAY, 0)
@@ -5938,7 +5905,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_getImageMean, 0, 0, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_IMAGE_RANGE
+#if IM_HAVE_IMAGICK_GET_IMAGE_RANGE
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_getImageRange, 0, 0, IS_ARRAY, 0)
@@ -5949,7 +5916,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_getImageRange, 0, 0, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_INTERPOLATE_METHOD
+#if IM_HAVE_IMAGICK_GET_INTERPOLATE_METHOD
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_getInterpolateMethod, 0, 0, IS_LONG, 0)
@@ -5960,7 +5927,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_getInterpolateMethod, 0, 0, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_OPTIONS
+#if IM_HAVE_IMAGICK_GET_OPTIONS
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_getOptions, 0, 0, IS_ARRAY, 0)
@@ -5972,7 +5939,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_getOptions, 0, 0, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_ORIENTATION
+#if IM_HAVE_IMAGICK_GET_ORIENTATION
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_getOrientation, 0, 0, IS_LONG, 0)
@@ -5983,7 +5950,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_getOrientation, 0, 0, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_RESOLUTION
+#if IM_HAVE_IMAGICK_GET_RESOLUTION
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_getResolution, 0, 0, IS_ARRAY, 0)
@@ -5994,7 +5961,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_getResolution, 0, 0, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_TYPE
+#if IM_HAVE_IMAGICK_GET_TYPE
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_getType, 0, 0, IS_LONG, 0)
@@ -6005,7 +5972,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_getType, 0, 0, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_POLYNOMIAL_IMAGE
+#if IM_HAVE_IMAGICK_POLYNOMIAL_IMAGE
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_polynomialImage, 0, 1, _IS_BOOL, 0)
@@ -6022,7 +5989,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_polynomialImage, 0, 0, 1)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_SET_DEPTH
+#if IM_HAVE_IMAGICK_SET_DEPTH
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_setDepth, 0, 1, _IS_BOOL, 0)
@@ -6039,7 +6006,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_setDepth, 0, 0, 1)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_SET_EXTRACT
+#if IM_HAVE_IMAGICK_SET_EXTRACT
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_setExtract, 0, 1, _IS_BOOL, 0)
@@ -6056,7 +6023,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_setExtract, 0, 0, 1)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_SET_INTERPOLATE_METHOD
+#if IM_HAVE_IMAGICK_SET_INTERPOLATE_METHOD
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_setInterpolateMethod, 0, 1, _IS_BOOL, 0)
@@ -6073,7 +6040,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Imagick_setInterpolateMethod, 0, 0, 1)
 ZEND_END_ARG_INFO()
 #endif
 
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_SET_ORIENTATION
+#if IM_HAVE_IMAGICK_SET_ORIENTATION
 
 #if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Imagick_setOrientation, 0, 1, _IS_BOOL, 0)
@@ -6222,6 +6189,9 @@ ZEND_METHOD(Imagick, paintFloodfillImage);
 #endif
 #if MagickLibVersion > 0x635
 ZEND_METHOD(Imagick, clutImage);
+#endif
+#if MagickLibVersion >= 0x700
+ZEND_METHOD(Imagick, clutImageWithInterpolateMethod);
 #endif
 #if MagickLibVersion > 0x635
 ZEND_METHOD(Imagick, getImageProperties);
@@ -6713,169 +6683,157 @@ ZEND_METHOD(Imagick, valid);
 #if MagickLibVersion > 0x628
 ZEND_METHOD(Imagick, current);
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x659
+#if MagickLibVersion >= 0x659
 ZEND_METHOD(Imagick, brightnessContrastImage);
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion > 0x661
+#if MagickLibVersion > 0x661
 ZEND_METHOD(Imagick, colorMatrixImage);
 #endif
-#if MagickLibVersion > 0x628
 ZEND_METHOD(Imagick, selectiveBlurImage);
-#endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x689
+#if MagickLibVersion >= 0x689
 ZEND_METHOD(Imagick, rotationalBlurImage);
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x683
+#if MagickLibVersion >= 0x683
 ZEND_METHOD(Imagick, statisticImage);
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x652
+#if MagickLibVersion >= 0x652
 ZEND_METHOD(Imagick, subimageMatch);
 #endif
-#if MagickLibVersion > 0x628
 ZEND_METHOD(Imagick, setRegistry);
-#endif
-#if MagickLibVersion > 0x628
 ZEND_METHOD(Imagick, getRegistry);
-#endif
-#if MagickLibVersion > 0x628
 ZEND_METHOD(Imagick, listRegistry);
-#endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x680
+#if MagickLibVersion >= 0x680
 ZEND_METHOD(Imagick, morphology);
 #endif
-#if MagickLibVersion > 0x628 && defined(IMAGICK_WITH_KERNEL) && MagickLibVersion < 0x700
+#if defined(IMAGICK_WITH_KERNEL) && MagickLibVersion < 0x700
 ZEND_METHOD(Imagick, filter);
 #endif
-#if MagickLibVersion > 0x628
 ZEND_METHOD(Imagick, setAntialias);
-#endif
-#if MagickLibVersion > 0x628
 ZEND_METHOD(Imagick, getAntialias);
-#endif
-#if MagickLibVersion > 0x628 && MagickLibVersion > 0x676
+#if MagickLibVersion > 0x676
 ZEND_METHOD(Imagick, colorDecisionListImage);
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x687
+#if MagickLibVersion >= 0x687
 ZEND_METHOD(Imagick, optimizeImageTransparency);
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x660
+#if MagickLibVersion >= 0x660
 ZEND_METHOD(Imagick, autoGammaImage);
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x692
+#if MagickLibVersion >= 0x692
 ZEND_METHOD(Imagick, autoOrient);
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x692
+#if MagickLibVersion >= 0x692
 ZEND_METHOD(Imagick, compositeImageGravity);
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x693
+#if MagickLibVersion >= 0x693
 ZEND_METHOD(Imagick, localContrastImage);
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x700
+#if MagickLibVersion >= 0x700
 ZEND_METHOD(Imagick, identifyImageType);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GETSETIMAGEMASK
+#if IM_HAVE_IMAGICK_GETSETIMAGEMASK
 ZEND_METHOD(Imagick, getImageMask);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GETSETIMAGEMASK
+#if IM_HAVE_IMAGICK_GETSETIMAGEMASK
 ZEND_METHOD(Imagick, setImageMask);
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x709
+#if MagickLibVersion >= 0x709
 ZEND_METHOD(Imagick, cannyEdgeImage);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_SETSEED
+#if IM_HAVE_IMAGICK_SETSEED
 ZEND_METHOD(Imagick, setSeed);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_WAVELETDENOISEIMAGE
+#if IM_HAVE_IMAGICK_WAVELETDENOISEIMAGE
 ZEND_METHOD(Imagick, waveletDenoiseImage);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_MEANSHIFTIMAGE
+#if IM_HAVE_IMAGICK_MEANSHIFTIMAGE
 ZEND_METHOD(Imagick, meanShiftImage);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_KMEANSIMAGE
+#if IM_HAVE_IMAGICK_KMEANSIMAGE
 ZEND_METHOD(Imagick, kmeansImage);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_RANGETHRESHOLDIMAGE
+#if IM_HAVE_IMAGICK_RANGETHRESHOLDIMAGE
 ZEND_METHOD(Imagick, rangeThresholdImage);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_AUTOTHRESHOLDIMAGE
+#if IM_HAVE_IMAGICK_AUTOTHRESHOLDIMAGE
 ZEND_METHOD(Imagick, autoThresholdImage);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_BILATERALBLURIMAGE
+#if IM_HAVE_IMAGICK_BILATERALBLURIMAGE
 ZEND_METHOD(Imagick, bilateralBlurImage);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_CLAHEIMAGE
+#if IM_HAVE_IMAGICK_CLAHEIMAGE
 ZEND_METHOD(Imagick, claheImage);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_CHANNELFXIMAGE
+#if IM_HAVE_IMAGICK_CHANNELFXIMAGE
 ZEND_METHOD(Imagick, channelFxImage);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_COLORTHRESHOLDIMAGE
+#if IM_HAVE_IMAGICK_COLORTHRESHOLDIMAGE
 ZEND_METHOD(Imagick, colorThresholdImage);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_COMPLEXIMAGES
+#if IM_HAVE_IMAGICK_COMPLEXIMAGES
 ZEND_METHOD(Imagick, complexImages);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_INTERPOLATIVERESIZEIMAGE
+#if IM_HAVE_IMAGICK_INTERPOLATIVERESIZEIMAGE
 ZEND_METHOD(Imagick, interpolativeResizeImage);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_LEVELIMAGECOLORS
+#if IM_HAVE_IMAGICK_LEVELIMAGECOLORS
 ZEND_METHOD(Imagick, levelImageColors);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_LEVELIZEIMAGE
+#if IM_HAVE_IMAGICK_LEVELIZEIMAGE
 ZEND_METHOD(Imagick, levelizeImage);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_ORDEREDDITHERIMAGE
+#if IM_HAVE_IMAGICK_ORDEREDDITHERIMAGE
 ZEND_METHOD(Imagick, orderedDitherImage);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_WHITEBALANCEIMAGE
+#if IM_HAVE_IMAGICK_WHITEBALANCEIMAGE
 ZEND_METHOD(Imagick, whiteBalanceImage);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_DELETE_OPTION
+#if IM_HAVE_IMAGICK_DELETE_OPTION
 ZEND_METHOD(Imagick, deleteOption);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_BACKGROUND_COLOR
+#if IM_HAVE_IMAGICK_GET_BACKGROUND_COLOR
 ZEND_METHOD(Imagick, getBackgroundColor);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_IMAGE_ARTIFACTS
+#if IM_HAVE_IMAGICK_GET_IMAGE_ARTIFACTS
 ZEND_METHOD(Imagick, getImageArtifacts);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_IMAGE_KURTOSIS
+#if IM_HAVE_IMAGICK_GET_IMAGE_KURTOSIS
 ZEND_METHOD(Imagick, getImageKurtosis);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_IMAGE_MEAN
+#if IM_HAVE_IMAGICK_GET_IMAGE_MEAN
 ZEND_METHOD(Imagick, getImageMean);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_IMAGE_RANGE
+#if IM_HAVE_IMAGICK_GET_IMAGE_RANGE
 ZEND_METHOD(Imagick, getImageRange);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_INTERPOLATE_METHOD
+#if IM_HAVE_IMAGICK_GET_INTERPOLATE_METHOD
 ZEND_METHOD(Imagick, getInterpolateMethod);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_OPTIONS
+#if IM_HAVE_IMAGICK_GET_OPTIONS
 ZEND_METHOD(Imagick, getOptions);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_ORIENTATION
+#if IM_HAVE_IMAGICK_GET_ORIENTATION
 ZEND_METHOD(Imagick, getOrientation);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_RESOLUTION
+#if IM_HAVE_IMAGICK_GET_RESOLUTION
 ZEND_METHOD(Imagick, getResolution);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_TYPE
+#if IM_HAVE_IMAGICK_GET_TYPE
 ZEND_METHOD(Imagick, getType);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_POLYNOMIAL_IMAGE
+#if IM_HAVE_IMAGICK_POLYNOMIAL_IMAGE
 ZEND_METHOD(Imagick, polynomialImage);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_SET_DEPTH
+#if IM_HAVE_IMAGICK_SET_DEPTH
 ZEND_METHOD(Imagick, setDepth);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_SET_EXTRACT
+#if IM_HAVE_IMAGICK_SET_EXTRACT
 ZEND_METHOD(Imagick, setExtract);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_SET_INTERPOLATE_METHOD
+#if IM_HAVE_IMAGICK_SET_INTERPOLATE_METHOD
 ZEND_METHOD(Imagick, setInterpolateMethod);
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_SET_ORIENTATION
+#if IM_HAVE_IMAGICK_SET_ORIENTATION
 ZEND_METHOD(Imagick, setOrientation);
 #endif
 
@@ -7015,6 +6973,9 @@ static const zend_function_entry class_Imagick_methods[] = {
 #endif
 #if MagickLibVersion > 0x635
 	ZEND_ME(Imagick, clutImage, arginfo_class_Imagick_clutImage, ZEND_ACC_PUBLIC)
+#endif
+#if MagickLibVersion >= 0x700
+	ZEND_ME(Imagick, clutImageWithInterpolateMethod, arginfo_class_Imagick_clutImageWithInterpolateMethod, ZEND_ACC_PUBLIC)
 #endif
 #if MagickLibVersion > 0x635
 	ZEND_ME(Imagick, getImageProperties, arginfo_class_Imagick_getImageProperties, ZEND_ACC_PUBLIC)
@@ -7511,175 +7472,163 @@ static const zend_function_entry class_Imagick_methods[] = {
 #if MagickLibVersion > 0x628
 	ZEND_ME(Imagick, current, arginfo_class_Imagick_current, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x659
+#if MagickLibVersion >= 0x659
 	ZEND_ME(Imagick, brightnessContrastImage, arginfo_class_Imagick_brightnessContrastImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion > 0x661
+#if MagickLibVersion > 0x661
 	ZEND_ME(Imagick, colorMatrixImage, arginfo_class_Imagick_colorMatrixImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628
 	ZEND_ME(Imagick, selectiveBlurImage, arginfo_class_Imagick_selectiveBlurImage, ZEND_ACC_PUBLIC)
-#endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x689
+#if MagickLibVersion >= 0x689
 	ZEND_ME(Imagick, rotationalBlurImage, arginfo_class_Imagick_rotationalBlurImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x683
+#if MagickLibVersion >= 0x683
 	ZEND_ME(Imagick, statisticImage, arginfo_class_Imagick_statisticImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x652
+#if MagickLibVersion >= 0x652
 	ZEND_ME(Imagick, subimageMatch, arginfo_class_Imagick_subimageMatch, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x652
+#if MagickLibVersion >= 0x652
 	ZEND_MALIAS(Imagick, similarityImage, subimageMatch, arginfo_class_Imagick_similarityImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628
 	ZEND_ME(Imagick, setRegistry, arginfo_class_Imagick_setRegistry, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
-#endif
-#if MagickLibVersion > 0x628
 	ZEND_ME(Imagick, getRegistry, arginfo_class_Imagick_getRegistry, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
-#endif
-#if MagickLibVersion > 0x628
 	ZEND_ME(Imagick, listRegistry, arginfo_class_Imagick_listRegistry, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
-#endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x680
+#if MagickLibVersion >= 0x680
 	ZEND_ME(Imagick, morphology, arginfo_class_Imagick_morphology, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && defined(IMAGICK_WITH_KERNEL) && MagickLibVersion < 0x700
+#if defined(IMAGICK_WITH_KERNEL) && MagickLibVersion < 0x700
 	ZEND_ME(Imagick, filter, arginfo_class_Imagick_filter, ZEND_ACC_PUBLIC|ZEND_ACC_DEPRECATED)
 #endif
-#if MagickLibVersion > 0x628
 	ZEND_ME(Imagick, setAntialias, arginfo_class_Imagick_setAntialias, ZEND_ACC_PUBLIC)
-#endif
-#if MagickLibVersion > 0x628
 	ZEND_ME(Imagick, getAntialias, arginfo_class_Imagick_getAntialias, ZEND_ACC_PUBLIC)
-#endif
-#if MagickLibVersion > 0x628 && MagickLibVersion > 0x676
+#if MagickLibVersion > 0x676
 	ZEND_ME(Imagick, colorDecisionListImage, arginfo_class_Imagick_colorDecisionListImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x687
+#if MagickLibVersion >= 0x687
 	ZEND_ME(Imagick, optimizeImageTransparency, arginfo_class_Imagick_optimizeImageTransparency, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x660
+#if MagickLibVersion >= 0x660
 	ZEND_ME(Imagick, autoGammaImage, arginfo_class_Imagick_autoGammaImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x692
+#if MagickLibVersion >= 0x692
 	ZEND_ME(Imagick, autoOrient, arginfo_class_Imagick_autoOrient, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x692
+#if MagickLibVersion >= 0x692
 	ZEND_MALIAS(Imagick, autoOrientate, autoOrient, arginfo_class_Imagick_autoOrientate, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x692
+#if MagickLibVersion >= 0x692
 	ZEND_ME(Imagick, compositeImageGravity, arginfo_class_Imagick_compositeImageGravity, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x693
+#if MagickLibVersion >= 0x693
 	ZEND_ME(Imagick, localContrastImage, arginfo_class_Imagick_localContrastImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x700
+#if MagickLibVersion >= 0x700
 	ZEND_ME(Imagick, identifyImageType, arginfo_class_Imagick_identifyImageType, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GETSETIMAGEMASK
+#if IM_HAVE_IMAGICK_GETSETIMAGEMASK
 	ZEND_ME(Imagick, getImageMask, arginfo_class_Imagick_getImageMask, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GETSETIMAGEMASK
+#if IM_HAVE_IMAGICK_GETSETIMAGEMASK
 	ZEND_ME(Imagick, setImageMask, arginfo_class_Imagick_setImageMask, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && MagickLibVersion >= 0x709
+#if MagickLibVersion >= 0x709
 	ZEND_ME(Imagick, cannyEdgeImage, arginfo_class_Imagick_cannyEdgeImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_SETSEED
+#if IM_HAVE_IMAGICK_SETSEED
 	ZEND_ME(Imagick, setSeed, arginfo_class_Imagick_setSeed, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_WAVELETDENOISEIMAGE
+#if IM_HAVE_IMAGICK_WAVELETDENOISEIMAGE
 	ZEND_ME(Imagick, waveletDenoiseImage, arginfo_class_Imagick_waveletDenoiseImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_MEANSHIFTIMAGE
+#if IM_HAVE_IMAGICK_MEANSHIFTIMAGE
 	ZEND_ME(Imagick, meanShiftImage, arginfo_class_Imagick_meanShiftImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_KMEANSIMAGE
+#if IM_HAVE_IMAGICK_KMEANSIMAGE
 	ZEND_ME(Imagick, kmeansImage, arginfo_class_Imagick_kmeansImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_RANGETHRESHOLDIMAGE
+#if IM_HAVE_IMAGICK_RANGETHRESHOLDIMAGE
 	ZEND_ME(Imagick, rangeThresholdImage, arginfo_class_Imagick_rangeThresholdImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_AUTOTHRESHOLDIMAGE
+#if IM_HAVE_IMAGICK_AUTOTHRESHOLDIMAGE
 	ZEND_ME(Imagick, autoThresholdImage, arginfo_class_Imagick_autoThresholdImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_BILATERALBLURIMAGE
+#if IM_HAVE_IMAGICK_BILATERALBLURIMAGE
 	ZEND_ME(Imagick, bilateralBlurImage, arginfo_class_Imagick_bilateralBlurImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_CLAHEIMAGE
+#if IM_HAVE_IMAGICK_CLAHEIMAGE
 	ZEND_ME(Imagick, claheImage, arginfo_class_Imagick_claheImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_CHANNELFXIMAGE
+#if IM_HAVE_IMAGICK_CHANNELFXIMAGE
 	ZEND_ME(Imagick, channelFxImage, arginfo_class_Imagick_channelFxImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_COLORTHRESHOLDIMAGE
+#if IM_HAVE_IMAGICK_COLORTHRESHOLDIMAGE
 	ZEND_ME(Imagick, colorThresholdImage, arginfo_class_Imagick_colorThresholdImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_COMPLEXIMAGES
+#if IM_HAVE_IMAGICK_COMPLEXIMAGES
 	ZEND_ME(Imagick, complexImages, arginfo_class_Imagick_complexImages, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_INTERPOLATIVERESIZEIMAGE
+#if IM_HAVE_IMAGICK_INTERPOLATIVERESIZEIMAGE
 	ZEND_ME(Imagick, interpolativeResizeImage, arginfo_class_Imagick_interpolativeResizeImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_LEVELIMAGECOLORS
+#if IM_HAVE_IMAGICK_LEVELIMAGECOLORS
 	ZEND_ME(Imagick, levelImageColors, arginfo_class_Imagick_levelImageColors, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_LEVELIZEIMAGE
+#if IM_HAVE_IMAGICK_LEVELIZEIMAGE
 	ZEND_ME(Imagick, levelizeImage, arginfo_class_Imagick_levelizeImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_ORDEREDDITHERIMAGE
+#if IM_HAVE_IMAGICK_ORDEREDDITHERIMAGE
 	ZEND_ME(Imagick, orderedDitherImage, arginfo_class_Imagick_orderedDitherImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_WHITEBALANCEIMAGE
+#if IM_HAVE_IMAGICK_WHITEBALANCEIMAGE
 	ZEND_ME(Imagick, whiteBalanceImage, arginfo_class_Imagick_whiteBalanceImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_DELETE_OPTION
+#if IM_HAVE_IMAGICK_DELETE_OPTION
 	ZEND_ME(Imagick, deleteOption, arginfo_class_Imagick_deleteOption, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_BACKGROUND_COLOR
+#if IM_HAVE_IMAGICK_GET_BACKGROUND_COLOR
 	ZEND_ME(Imagick, getBackgroundColor, arginfo_class_Imagick_getBackgroundColor, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_IMAGE_ARTIFACTS
+#if IM_HAVE_IMAGICK_GET_IMAGE_ARTIFACTS
 	ZEND_ME(Imagick, getImageArtifacts, arginfo_class_Imagick_getImageArtifacts, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_IMAGE_KURTOSIS
+#if IM_HAVE_IMAGICK_GET_IMAGE_KURTOSIS
 	ZEND_ME(Imagick, getImageKurtosis, arginfo_class_Imagick_getImageKurtosis, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_IMAGE_MEAN
+#if IM_HAVE_IMAGICK_GET_IMAGE_MEAN
 	ZEND_ME(Imagick, getImageMean, arginfo_class_Imagick_getImageMean, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_IMAGE_RANGE
+#if IM_HAVE_IMAGICK_GET_IMAGE_RANGE
 	ZEND_ME(Imagick, getImageRange, arginfo_class_Imagick_getImageRange, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_INTERPOLATE_METHOD
+#if IM_HAVE_IMAGICK_GET_INTERPOLATE_METHOD
 	ZEND_ME(Imagick, getInterpolateMethod, arginfo_class_Imagick_getInterpolateMethod, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_OPTIONS
+#if IM_HAVE_IMAGICK_GET_OPTIONS
 	ZEND_ME(Imagick, getOptions, arginfo_class_Imagick_getOptions, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_ORIENTATION
+#if IM_HAVE_IMAGICK_GET_ORIENTATION
 	ZEND_ME(Imagick, getOrientation, arginfo_class_Imagick_getOrientation, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_RESOLUTION
+#if IM_HAVE_IMAGICK_GET_RESOLUTION
 	ZEND_ME(Imagick, getResolution, arginfo_class_Imagick_getResolution, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_GET_TYPE
+#if IM_HAVE_IMAGICK_GET_TYPE
 	ZEND_ME(Imagick, getType, arginfo_class_Imagick_getType, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_POLYNOMIAL_IMAGE
+#if IM_HAVE_IMAGICK_POLYNOMIAL_IMAGE
 	ZEND_ME(Imagick, polynomialImage, arginfo_class_Imagick_polynomialImage, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_SET_DEPTH
+#if IM_HAVE_IMAGICK_SET_DEPTH
 	ZEND_ME(Imagick, setDepth, arginfo_class_Imagick_setDepth, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_SET_EXTRACT
+#if IM_HAVE_IMAGICK_SET_EXTRACT
 	ZEND_ME(Imagick, setExtract, arginfo_class_Imagick_setExtract, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_SET_INTERPOLATE_METHOD
+#if IM_HAVE_IMAGICK_SET_INTERPOLATE_METHOD
 	ZEND_ME(Imagick, setInterpolateMethod, arginfo_class_Imagick_setInterpolateMethod, ZEND_ACC_PUBLIC)
 #endif
-#if MagickLibVersion > 0x628 && IM_HAVE_IMAGICK_SET_ORIENTATION
+#if IM_HAVE_IMAGICK_SET_ORIENTATION
 	ZEND_ME(Imagick, setOrientation, arginfo_class_Imagick_setOrientation, ZEND_ACC_PUBLIC)
 #endif
 	ZEND_FE_END

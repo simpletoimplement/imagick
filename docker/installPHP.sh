@@ -20,10 +20,17 @@ cd /var/app/php_src/${SRCFILE}
   --without-pear \
   --without-sqlite3 \
   --without-pdo-sqlite \
-  --with-openssl \
+  --without-openssl \
+  --without-iconv \
   --enable-mbstring \
   --with-curl \
-  --with-zip
+  --with-zip \
+  --enable-phpdbg=no \
+  --disable-cgi
+
+
+   \
+  --disable-phar
 
 
 
